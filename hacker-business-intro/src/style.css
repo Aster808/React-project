@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  font-family: 'IBM Plex Mono', monospace;
+  color: #eeeeee;
+  background: #030303;
+  font-synthesis: none;
+}
+* { box-sizing: border-box; }
+html, body, #root { margin: 0; width: 100%; min-width: 320px; min-height: 100%; }
+body { overflow-x: hidden; }
+button { font: inherit; }
+.screen { position: relative; width: 100%; min-height: 100vh; overflow: hidden; isolation: isolate; background: #030303; }
+.hacker-screen { height: 100vh; }
+
+.reveal-content {
+  position: absolute; z-index: 2; inset: 0; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; padding: 40px 24px; text-align: center;
+  opacity: 0; visibility: hidden; transform: scale(.94);
+  transition: opacity 1.2s ease 1s, transform 1.5s ease 1s, visibility 0s linear 2.2s;
+}
+.reveal-content.visible {
+  opacity: 1; visibility: visible; transform: scale(1);
+  transition: opacity 1.2s ease 1s, transform 1.5s ease 1s, visibility 0s;
+}
+.portfolio-label { color: #ff6736; font-size: 10px; letter-spacing: 3px; margin-bottom: 30px; }
+.reveal-content h1 {
+  color: #eee; font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(30px, 5.5vw, 68px); line-height: 1.12;
+  font-weight: 600; letter-spacing: -2px; margin: 0;
+}
+.reveal-content h1 span { color: #ff6736; }
+.mission { color: #999; max-width: 650px; font-size: 12px; line-height: 2; margin-top: 28px; }
+.mission-divider { width: 100px; height: 1px; background: #ff6736; margin: 35px 0; box-shadow: 0 0 10px #ff6736; }
+.mission-points { display: flex; justify-content: center; flex-wrap: wrap; gap: 55px; }
+.mission-points div { display: flex; flex-direction: column; gap: 10px; text-align: center; }
+.mission-points strong { color: #ff6736; font-size: 22px; }
+.mission-points span { color: #999; font-size: 9px; letter-spacing: 1.5px; }
+.mission-footer { position: absolute; bottom: 35px; color: #555; font-size: 9px; letter-spacing: 2px; }
+.replay-button { margin-top: 25px; padding: 11px 18px; border: 1px solid #555; background: transparent; color: #ddd; letter-spacing: 1px; font-size: 9px; cursor: pointer; }
+.replay-button:hover { border-color: #ff6736; color: #ff6736; }
+
+.hacker-wall { position: absolute; inset: 0; z-index: 5; display: flex; overflow: hidden; pointer-events: none; }
+.code-panel {
+  position: relative; width: 50%; height: 100%; overflow: hidden; background: #030303;
+  transition: transform 2.3s cubic-bezier(.76, 0, .24, 1); will-change: transform;
+}
+.panel-left { border-right: 1px solid rgba(255,75,15,.2); }
+.panel-right { border-left: 1px solid rgba(255,75,15,.2); }
+.wall-open .panel-left { transform: translateX(-101%); }
+.wall-open .panel-right { transform: translateX(101%); }
+
+.code-column {
+  position: absolute; top: -120%; white-space: pre; line-height: 1.45;
+  font-weight: 600; color: #ff5725;
+  text-shadow: 0 0 5px #ff3c12, 0 0 13px rgba(255,45,0,.8), 0 0 25px rgba(255,45,0,.35);
+  animation: hackerRain linear infinite; user-select: none; pointer-events: none;
+}
+@keyframes hackerRain { from { transform: translateY(0); } to { transform: translateY(240vh); } }
+
+.hacker-overlay { position: absolute; inset: 0; z-index: 7; color: white; transition: opacity .8s ease; pointer-events: none; }
+.hacker-overlay.overlay-open { opacity: 0; transition-delay: 1.1s; }
+.hacker-status { position: absolute; top: 35px; left: 5%; right: 5%; display: flex; justify-content: space-between; color: #ff6736; font-size: 9px; letter-spacing: 2px; }
+.hacker-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 90%; }
+.hacker-small { font-size: 10px; letter-spacing: 4px; color: #ff7140; margin-bottom: 25px; }
+.hacker-start {
+  padding: 15px 35px; background: rgba(255,70,20,.12); border: 1px solid #ff5425;
+  color: #ff713c; font-family: inherit; font-size: 11px; letter-spacing: 3px;
+  cursor: pointer; pointer-events: auto; box-shadow: 0 0 20px rgba(255,65,15,.2); transition: .3s;
+}
+.hacker-start:hover:not(:disabled) { background: #ff5725; color: black; box-shadow: 0 0 35px rgba(255,65,15,.7); }
+.hacker-start:disabled { cursor: default; }
+.hacker-center p { margin-top: 20px; font-size: 9px; color: #777; letter-spacing: 2px; }
+.hacker-terminal { position: absolute; left: 5%; bottom: 7%; color: #a5a5a5; font-size: 9px; line-height: 2; letter-spacing: 1px; }
+
+@media (max-width: 600px) {
+  .hacker-status { font-size: 7px; }
+  .reveal-content { padding: 20px; }
+  .reveal-content h1 { font-size: clamp(28px, 8vw, 42px); letter-spacing: -1px; }
+  .mission { font-size: 11px; line-height: 1.8; }
+  .mission-points { gap: 20px; }
+  .mission-points span { font-size: 7px; }
+  .mission-footer { font-size: 7px; text-align: center; }
+  .hacker-terminal { font-size: 7px; }
+  .hacker-small { font-size: 8px; }
+  .hacker-start { padding: 13px 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .code-column { animation-duration: 30s !important; }
+  .code-panel, .reveal-content, .hacker-overlay { transition-duration: .01ms !important; }
+}
